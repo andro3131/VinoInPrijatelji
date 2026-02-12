@@ -1,0 +1,90 @@
+---
+---
+
+<section id="vstopnice" class="py-24 md:py-32 bg-teal-900 relative overflow-hidden">
+  <!-- Decorative background -->
+  <div class="absolute top-0 right-0 w-96 h-96 bg-gold-500/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+  <div class="absolute bottom-0 left-0 w-64 h-64 bg-gold-500/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+
+  <div class="max-w-4xl mx-auto px-6 relative z-10">
+    <div class="text-center mb-16 fade-in">
+      <div class="flex items-center justify-center gap-4 mb-8">
+        <div class="w-12 h-px bg-gold-500/50"></div>
+        <p class="text-gold-400 text-sm tracking-[0.3em] uppercase">Omejeno število mest</p>
+        <div class="w-12 h-px bg-gold-500/50"></div>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-heading font-bold text-white">
+        Vstopnice
+      </h2>
+    </div>
+
+    <!-- Pricing card -->
+    <div class="fade-in max-w-lg mx-auto">
+      <div class="bg-teal-800/50 backdrop-blur-sm border border-gold-500/20 rounded-3xl p-10 md:p-12 text-center">
+        <p class="text-gold-400 text-sm tracking-[0.2em] uppercase mb-4">Celodnevno doživetje</p>
+
+        <div class="flex items-end justify-center gap-1 mb-8">
+          <span class="text-6xl md:text-7xl font-heading font-bold text-white">49</span>
+          <span class="text-2xl text-white/80 font-heading mb-2">&euro;</span>
+          <span class="text-white/50 mb-2 ml-1">/ osebo</span>
+        </div>
+
+        <!-- What's included list -->
+        <ul class="text-left space-y-3 mb-10">
+          <li class="flex items-center gap-3 text-white/80 text-sm">
+            <svg class="w-5 h-5 text-gold-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+            </svg>
+            12 vzorcev vin (4 pri vsakem vinarju)
+          </li>
+          <li class="flex items-center gap-3 text-white/80 text-sm">
+            <svg class="w-5 h-5 text-gold-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+            </svg>
+            Prigrizki ob vsaki degustaciji
+          </li>
+          <li class="flex items-center gap-3 text-white/80 text-sm">
+            <svg class="w-5 h-5 text-gold-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+            </svg>
+            Živa glasba in animacija
+          </li>
+          <li class="flex items-center gap-3 text-white/80 text-sm">
+            <svg class="w-5 h-5 text-gold-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+            </svg>
+            After party
+          </li>
+          <li class="flex items-center gap-3 text-white/80 text-sm">
+            <svg class="w-5 h-5 text-gold-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+            </svg>
+            Organiziran prevoz na izhodišče
+          </li>
+        </ul>
+
+        <!-- Stripe Payment Link - replace # with your Stripe Payment Link URL -->
+        <a
+          href="#"
+          id="checkout-btn"
+          class="block w-full bg-gold-500 hover:bg-gold-400 text-teal-950 py-4 px-8 rounded-full text-lg font-semibold tracking-wide transition-all hover:scale-105 text-center"
+          data-stripe-link
+        >
+          Kupi vstopnico
+        </a>
+
+        <p class="text-white/40 text-xs mt-4">
+          Varen nakup prek Stripe. Prejmete potrditveni email.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+  NAVODILA ZA STRIPE:
+  1. Pojdi na https://dashboard.stripe.com/payment-links
+  2. Ustvari nov Payment Link za 49 EUR z imenom "Vino & Prijatelji - Vstopnica"
+  3. Zamenjaj href="#" zgoraj z URL-jem Payment Linka (npr. https://buy.stripe.com/xxx)
+  4. V Payment Link nastavitvah nastavi success URL na https://tvoja-domena.si/success
+-->

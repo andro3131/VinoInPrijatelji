@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Uspešen nakup | Vino & Prijatelji">
+  <div class="min-h-screen bg-teal-900 flex items-center justify-center px-6">
+    <div class="max-w-lg text-center">
+      <!-- Success icon -->
+      <div class="w-20 h-20 bg-gold-500/20 rounded-full flex items-center justify-center mx-auto mb-8">
+        <svg class="w-10 h-10 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+        </svg>
+      </div>
+
+      <h1 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+        Hvala za nakup!
+      </h1>
+
+      <p class="text-white/70 text-lg leading-relaxed mb-4">
+        Vaša vstopnica za <strong class="text-gold-400">Vino & Prijatelji</strong> je potrjena.
+        Na vaš email smo poslali potrditev z vsemi podrobnostmi.
+      </p>
+
+      <p class="text-white/50 text-sm mb-8">
+        Vidimo se 18. aprila 2026 v Urbanovi kleti!
+      </p>
+
+      <a
+        href="/"
+        class="inline-block bg-gold-500 hover:bg-gold-400 text-teal-950 px-8 py-4 rounded-full text-base font-semibold tracking-wide transition-all hover:scale-105"
+      >
+        Nazaj na domačo stran
+      </a>
+    </div>
+  </div>
+</Layout>

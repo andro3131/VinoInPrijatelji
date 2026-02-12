@@ -1,0 +1,102 @@
+---
+const links = [
+  { href: '#o-dogodku', label: 'O dogodku' },
+  { href: '#program', label: 'Program' },
+  { href: '#vinarji', label: 'Vinarji' },
+  { href: '#vstopnice', label: 'Vstopnice' },
+];
+---
+
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#" class="font-heading text-2xl font-bold text-white tracking-wide">
+      V<span class="text-gold-500">&</span>P
+    </a>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-8">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class="text-white/80 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide uppercase"
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="#vstopnice"
+        class="bg-gold-500 hover:bg-gold-400 text-teal-950 px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-colors"
+      >
+        Kupi vstopnico
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden text-white p-2"
+      aria-label="Odpri meni"
+    >
+      <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-teal-950/95 backdrop-blur-md">
+    <div class="px-6 py-4 flex flex-col gap-4">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class="mobile-link text-white/80 hover:text-gold-400 transition-colors text-base font-medium tracking-wide"
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="#vstopnice"
+        class="mobile-link bg-gold-500 hover:bg-gold-400 text-teal-950 px-5 py-3 rounded-full text-sm font-semibold tracking-wide text-center transition-colors"
+      >
+        Kupi vstopnico
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navbar?.classList.add('navbar-scrolled');
+    } else {
+      navbar?.classList.remove('navbar-scrolled');
+    }
+  });
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  menuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.mobile-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    });
+  });
+</script>
