@@ -16,7 +16,7 @@ const winemakers = [
     fullDescription: 'Posestvo Kolenc je last vinarske družine Kolenc, ki se že tri generacije ukvarja z vinogradništvom. Vinska klet se nahaja v vasici Gorenja vas pri Mirni nad dolino reke Mirne, Dolenjska. Kot družina cenimo zemljo, delo, povezovanje in tradicijo, hkrati pa vpeljujemo nove pristope v pridelavi ter pridelujemo vina modernega stila. Pri nas boste lahko poskusili tako sveža kot tudi zrela vina, katerih grozdje je dozorelo v vinogradih sončnih južnih leg, na dobrih 350 m nadmorske višine. Želimo, da je vino naravno. Torej fermentiran sok grozdja, ki močno zrcali svoj izvor.',
     speciality: 'Bela vina',
     image: '/images/kolenc-1.jpg',
-    thumbPosition: 'top',
+    thumbPosition: '25%',
     gallery: ['/images/kolenc.jpg', '/images/kolenc-2.jpg', '/images/kolenc-3.jpg', '/images/kolenc-5.jpg'],
   },
   {
@@ -60,7 +60,8 @@ const winemakers = [
             <img
               src={wm.image}
               alt={wm.name}
-              class={`absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${wm.thumbPosition === 'top' ? 'object-top' : ''}`}
+              class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              style={wm.thumbPosition ? `object-position: center ${wm.thumbPosition}` : ''}
               loading="lazy"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-teal-950/60 to-transparent"></div>
