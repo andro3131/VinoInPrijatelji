@@ -16,6 +16,7 @@ const winemakers = [
     fullDescription: 'Posestvo Kolenc je last vinarske družine Kolenc, ki se že tri generacije ukvarja z vinogradništvom. Vinska klet se nahaja v vasici Gorenja vas pri Mirni nad dolino reke Mirne, Dolenjska. Kot družina cenimo zemljo, delo, povezovanje in tradicijo, hkrati pa vpeljujemo nove pristope v pridelavi ter pridelujemo vina modernega stila. Pri nas boste lahko poskusili tako sveža kot tudi zrela vina, katerih grozdje je dozorelo v vinogradih sončnih južnih leg, na dobrih 350 m nadmorske višine. Želimo, da je vino naravno. Torej fermentiran sok grozdja, ki močno zrcali svoj izvor.',
     speciality: 'Bela vina',
     image: '/images/kolenc-1.jpg',
+    thumbPosition: 'top',
     gallery: ['/images/kolenc.jpg', '/images/kolenc-2.jpg', '/images/kolenc-3.jpg', '/images/kolenc-5.jpg'],
   },
   {
@@ -59,7 +60,7 @@ const winemakers = [
             <img
               src={wm.image}
               alt={wm.name}
-              class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              class={`absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${wm.thumbPosition === 'top' ? 'object-top' : ''}`}
               loading="lazy"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-teal-950/60 to-transparent"></div>
@@ -134,16 +135,15 @@ const winemakers = [
       : '';
 
     content.innerHTML = `
-      <div class="rounded-t-3xl overflow-hidden relative" id="modal-hero">
-        <img src="${wm.image}" alt="${wm.name}" class="w-full block transition-opacity duration-300" id="modal-hero-img" />
-        <div class="absolute inset-0 bg-gradient-to-t from-teal-950/60 to-transparent"></div>
-        <div class="absolute bottom-6 left-8">
-          <span class="bg-gold-500/90 text-teal-950 text-xs font-semibold px-3 py-1 rounded-full">${wm.speciality}</span>
-        </div>
-      </div>
-      <div class="p-8 md:p-10">
-        <h3 class="text-2xl md:text-3xl font-heading font-bold text-teal-900 mb-4">${wm.name}</h3>
+      <div class="p-8 md:p-10 pb-4">
+        <span class="bg-gold-500/90 text-teal-950 text-xs font-semibold px-3 py-1 rounded-full">${wm.speciality}</span>
+        <h3 class="text-2xl md:text-3xl font-heading font-bold text-teal-900 mt-4 mb-4">${wm.name}</h3>
         <p class="text-teal-800/70 leading-relaxed">${wm.fullDescription}</p>
+      </div>
+      <div class="overflow-hidden relative mx-4 md:mx-6 rounded-2xl" id="modal-hero" style="max-height: 70vh;">
+        <img src="${wm.image}" alt="${wm.name}" class="w-full block object-cover transition-opacity duration-300" style="margin-top: -10%; margin-bottom: -10%; min-height: 100%;" id="modal-hero-img" />
+      </div>
+      <div class="p-8 md:p-10 pt-4">
         ${galleryHtml}
       </div>
     `;
