@@ -1,6 +1,15 @@
 ---
 const winemakers = [
   {
+    id: 'urbanova-klet',
+    name: 'VTD Urbanova klet',
+    summary: 'Izhodiščna točka našega vinskega potovanja. Domačija v Čatežu pri Trebnjem, kjer se začne in zaključi naš dan.',
+    fullDescription: 'Urbanova klet v Čatežu pri Trebnjem je izhodiščna točka dogodka Od kleti do noči. Tu se zberemo, prevzamemo kozarce in se ob uvodnem napitku spoznamo, preden se odpravimo na pot med vinarji.',
+    speciality: 'Izhodiščna točka',
+    image: '/images/hero.jpg',
+    gallery: [],
+  },
+  {
     id: 'kolenc',
     name: 'Vinska klet Kolenc',
     summary: 'Tri generacije vinarske tradicije v vasici Gorenja vas pri Mirni. Sveža in zrela vina z južnih leg na 350 m nadmorske višine.',
@@ -43,7 +52,7 @@ const winemakers = [
       </h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       {winemakers.map((wm) => (
         <div class="fade-in group cursor-pointer" data-winemaker={wm.id}>
           <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6 relative">
@@ -108,13 +117,16 @@ const winemakers = [
     const modal = document.getElementById('winemaker-modal');
     const content = document.getElementById('modal-content');
 
-    const galleryHtml = wm.gallery.length > 0
-      ? `<div class="grid grid-cols-2 md:grid-cols-3 gap-3 mt-6">
-          ${wm.gallery.map((img, i) => `
+    const allImages = [wm.image, ...wm.gallery];
+
+    const galleryHtml = allImages.length > 1
+      ? `<div class="grid grid-cols-3 md:grid-cols-4 gap-3 mt-6">
+          ${allImages.map((img, i) => `
             <img
               src="${img}"
               alt="${wm.name} - slika ${i + 1}"
-              class="rounded-xl w-full aspect-square object-cover hover:scale-[1.02] transition-transform cursor-pointer gallery-img"
+              class="rounded-xl w-full aspect-square object-cover hover:scale-[1.02] transition-transform cursor-pointer gallery-thumb ${i === 0 ? 'ring-2 ring-gold-500' : 'opacity-70 hover:opacity-100'}"
+              data-full="${img}"
               loading="lazy"
             />
           `).join('')}
@@ -122,8 +134,8 @@ const winemakers = [
       : '';
 
     content.innerHTML = `
-      <div class="aspect-[2/1] rounded-t-3xl overflow-hidden relative">
-        <img src="${wm.image}" alt="${wm.name}" class="w-full h-full object-cover" />
+      <div class="aspect-[2/1] rounded-t-3xl overflow-hidden relative" id="modal-hero">
+        <img src="${wm.image}" alt="${wm.name}" class="w-full h-full object-cover transition-opacity duration-300" id="modal-hero-img" />
         <div class="absolute inset-0 bg-gradient-to-t from-teal-950/60 to-transparent"></div>
         <div class="absolute bottom-6 left-8">
           <span class="bg-gold-500/90 text-teal-950 text-xs font-semibold px-3 py-1 rounded-full">${wm.speciality}</span>
@@ -135,6 +147,25 @@ const winemakers = [
         ${galleryHtml}
       </div>
     `;
+
+    // Gallery thumbnail click → swap main image
+    content.querySelectorAll('.gallery-thumb').forEach(thumb => {
+      thumb.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const heroImg = document.getElementById('modal-hero-img');
+        heroImg.style.opacity = '0';
+        setTimeout(() => {
+          heroImg.src = thumb.dataset.full;
+          heroImg.style.opacity = '1';
+        }, 150);
+        content.querySelectorAll('.gallery-thumb').forEach(t => {
+          t.classList.remove('ring-2', 'ring-gold-500');
+          t.classList.add('opacity-70');
+        });
+        thumb.classList.add('ring-2', 'ring-gold-500');
+        thumb.classList.remove('opacity-70');
+      });
+    });
 
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
