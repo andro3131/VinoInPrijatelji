@@ -18,6 +18,7 @@ const winemakers = [
     image: '/images/kolenc-1.jpg',
     thumbPosition: '25%',
     gallery: ['/images/kolenc.jpg', '/images/kolenc-2.jpg', '/images/kolenc-3.jpg'],
+    imagePositions: { '/images/kolenc-2.jpg': '20%', '/images/kolenc-3.jpg': '20%' },
   },
   {
     id: 'kresal',
@@ -27,6 +28,7 @@ const winemakers = [
     speciality: 'Avtohtone sorte',
     image: 'https://res.cloudinary.com/dewf3zos0/image/upload/v1771324066/514339827_10162596689644557_1769452427068445476_n_enhanced_egdads.jpg',
     gallery: ['https://res.cloudinary.com/dewf3zos0/image/upload/v1771324068/488769230_9430132867071748_1146012617450010047_n_enhanced_plf5gq.jpg', 'https://res.cloudinary.com/dewf3zos0/image/upload/v1771324063/491917749_9517837108301323_2210376349932395815_n_la3fry.jpg', 'https://res.cloudinary.com/dewf3zos0/image/upload/v1771173326/zephyr-make-the-picture-less-blurry-0_othed0.jpg'],
+    imagePositions: { 'https://res.cloudinary.com/dewf3zos0/image/upload/v1771324068/488769230_9430132867071748_1146012617450010047_n_enhanced_plf5gq.jpg': '20%', 'https://res.cloudinary.com/dewf3zos0/image/upload/v1771173326/zephyr-make-the-picture-less-blurry-0_othed0.jpg': '20%' },
   },
   {
     id: 'ravnikar',
@@ -121,6 +123,7 @@ const winemakers = [
 
     const allImages = [wm.image, ...wm.gallery];
 
+    const positions = wm.imagePositions || {};
     const galleryHtml = allImages.length > 1
       ? `<div class="grid grid-cols-4 gap-2 md:gap-3 mt-6">
           ${allImages.map((img, i) => `
@@ -129,6 +132,7 @@ const winemakers = [
               alt="${wm.name} - slika ${i + 1}"
               class="rounded-xl w-full aspect-square object-cover hover:scale-[1.02] transition-transform cursor-pointer gallery-thumb ${i === 0 ? 'ring-2 ring-gold-500' : 'opacity-70 hover:opacity-100'}"
               data-full="${img}"
+              data-position="${positions[img] || 'center'}"
               loading="lazy"
             />
           `).join('')}
@@ -142,7 +146,7 @@ const winemakers = [
         <p class="text-teal-800/70 leading-relaxed">${wm.fullDescription}</p>
       </div>
       <div class="overflow-hidden relative mx-4 md:mx-6 rounded-2xl" id="modal-hero" style="max-height: 70vh;">
-        <img src="${wm.image}" alt="${wm.name}" class="w-full block object-cover transition-opacity duration-300" style="margin-top: -10%; margin-bottom: -10%; min-height: 100%;" id="modal-hero-img" />
+        <img src="${wm.image}" alt="${wm.name}" class="w-full block object-cover transition-opacity duration-300" style="margin-top: -10%; margin-bottom: -10%; min-height: 100%; object-position: center ${positions[wm.image] || 'center'};" id="modal-hero-img" />
       </div>
       <div class="p-8 md:p-10 pt-4">
         ${galleryHtml}
@@ -157,6 +161,7 @@ const winemakers = [
         heroImg.style.opacity = '0';
         setTimeout(() => {
           heroImg.src = thumb.dataset.full;
+          heroImg.style.objectPosition = 'center ' + thumb.dataset.position;
           heroImg.style.opacity = '1';
         }, 150);
         content.querySelectorAll('.gallery-thumb').forEach(t => {
