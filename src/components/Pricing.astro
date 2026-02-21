@@ -77,30 +77,8 @@
           </li>
         </ul>
 
-        <!-- Quantity selector -->
-        <div class="flex items-center justify-center gap-4 mb-6">
-          <label class="text-white/70 text-sm">Število vstopnic:</label>
-          <div class="flex items-center bg-teal-900/80 border border-gold-500/30 rounded-full">
-            <button
-              id="qty-minus"
-              type="button"
-              class="w-10 h-10 flex items-center justify-center text-gold-400 hover:text-gold-300 text-xl font-bold transition-colors"
-            >
-              &minus;
-            </button>
-            <span id="qty-value" class="w-10 text-center text-white text-lg font-semibold">1</span>
-            <button
-              id="qty-plus"
-              type="button"
-              class="w-10 h-10 flex items-center justify-center text-gold-400 hover:text-gold-300 text-xl font-bold transition-colors"
-            >
-              +
-            </button>
-          </div>
-        </div>
-
         <a
-          href="https://buy.stripe.com/4gM7sLep0a9N5ZD8ff1kA01?quantity=1"
+          href="https://buy.stripe.com/4gM7sLep0a9N5ZD8ff1kA01"
           id="checkout-btn"
           class="block w-full bg-gold-500 hover:bg-gold-400 text-teal-950 py-4 px-8 rounded-full text-lg font-semibold tracking-wide transition-all hover:scale-105 text-center"
         >
@@ -114,28 +92,3 @@
     </div>
   </div>
 </section>
-
-<script>
-  const minusBtn = document.getElementById('qty-minus');
-  const plusBtn = document.getElementById('qty-plus');
-  const qtyValue = document.getElementById('qty-value');
-  const checkoutBtn = document.getElementById('checkout-btn') as HTMLAnchorElement;
-  const baseUrl = 'https://buy.stripe.com/4gM7sLep0a9N5ZD8ff1kA01';
-
-  let quantity = 1;
-  const MAX_QTY = 10;
-
-  function update() {
-    qtyValue!.textContent = String(quantity);
-    checkoutBtn!.href = `${baseUrl}?quantity=${quantity}`;
-    checkoutBtn!.textContent = quantity === 1 ? 'Kupi vstopnico' : `Kupi ${quantity} vstopnic`;
-  }
-
-  minusBtn!.addEventListener('click', () => {
-    if (quantity > 1) { quantity--; update(); }
-  });
-
-  plusBtn!.addEventListener('click', () => {
-    if (quantity < MAX_QTY) { quantity++; update(); }
-  });
-</script>
