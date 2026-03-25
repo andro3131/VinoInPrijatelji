@@ -1,33 +1,27 @@
 ---
-const sponsors = [
-  {
-    name: 'TEM',
-    logo: 'https://res.cloudinary.com/dewf3zos0/image/upload/v1774465332/TEM_p09iaj.png',
-  },
-  {
-    name: 'Dana',
-    logo: 'https://res.cloudinary.com/dewf3zos0/image/upload/v1774465332/dana_hes9xm.png',
-  },
-  {
-    name: 'Supergroup',
-    logo: 'https://res.cloudinary.com/dewf3zos0/image/upload/v1774465333/supergroup_sclfsb.png',
-  },
-];
 ---
 
 <section class="py-16 bg-teal-900 border-t border-white/5">
   <div class="max-w-5xl mx-auto px-6">
     <div class="text-center mb-10 fade-in">
-      <p class="text-white/40 text-sm tracking-[0.2em] uppercase">Nas podpirajo</p>
+      <p class="text-white/40 text-sm tracking-[0.2em] uppercase">Partnerji dogodka</p>
     </div>
     <div class="flex items-center justify-center gap-12 md:gap-20 flex-wrap fade-in">
-      {sponsors.map((sponsor) => (
-        <img
-          src={sponsor.logo}
-          alt={sponsor.name}
-          class="h-10 md:h-12 w-auto object-contain brightness-0 invert opacity-50 hover:opacity-80 transition-opacity"
-        />
-      ))}
+      <img
+        src="https://res.cloudinary.com/dewf3zos0/image/upload/v1774465332/TEM_p09iaj.png"
+        alt="TEM"
+        class="h-10 md:h-12 w-auto object-contain brightness-0 invert opacity-50 hover:opacity-80 transition-opacity"
+      />
+      <img
+        src="https://res.cloudinary.com/dewf3zos0/image/upload/v1774465332/dana_hes9xm.png"
+        alt="Dana"
+        class="h-10 md:h-12 w-auto object-contain brightness-0 invert opacity-50 hover:opacity-80 transition-opacity -mt-2"
+      />
+      <img
+        src="https://res.cloudinary.com/dewf3zos0/image/upload/v1774466226/supergoup2_d6wtz0.png"
+        alt="Supergroup"
+        class="h-10 md:h-12 w-auto object-contain brightness-0 invert opacity-50 hover:opacity-80 transition-opacity"
+      />
     </div>
   </div>
 </section>
