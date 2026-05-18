@@ -1,0 +1,616 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Sponsors from '../components/Sponsors.astro';
+import Footer from '../components/Footer.astro';
+
+const program = [
+  {
+    time: '16:30 – 17:00',
+    title: 'Dobrodošlica',
+    description: 'Prihod na posestvo Ravnikarjeve zidanice, prevzem kozarca, registracija in pozdravni kozarček.',
+    icon: '🥂',
+  },
+  {
+    time: '17:00 – 19:00',
+    title: 'Vinska degustacija',
+    description: 'Vodena vinska degustacija s sommelierjem in predstavitev 10 vzorcev vina obeh vinarjev. Spremljajoča s prigrizki.',
+    icon: '🍷',
+  },
+  {
+    time: '19:00 – 19:30',
+    title: 'Sprostitev',
+    description: 'Čas za sprostitev, živo muziko, druženje in kavico.',
+    icon: '🎵',
+  },
+  {
+    time: '19:30 – 00:00',
+    title: 'Sunset after party',
+    description: 'Sunset after party v spremljavi poletnih ritmov ter sončnega zahoda na razgledni ploščadi. DJ Urban Šilec (DJ Uxny).',
+    icon: '🌅',
+  },
+];
+
+const hosts = [
+  {
+    id: 'stih',
+    name: 'Gašper Štih',
+    role: 'Štihi Vinček',
+    location: 'Smolenja vas pri Novem mestu',
+    summary: 'Butična klet z iskrenim pristopom k vinarjenju. Gašper v svojih vinogradih išče ravnovesje med naravo in tradicijo dolenjskega terroir.',
+    fullDescription: 'Štihi Vinček je butična klet Gašperja Štiha v Smolenjski vasi pri Novem mestu. Gašper pristopa k vinarjenju z globokim spoštovanjem do narave in terroir dolenjskega območja. Njegova vina odražajo pristnost in karakter rodovitnih dolenjskih leg, pri čemer daje prednost minimalnim posegom v kleti in čim bolj naravnemu procesu zorenja.',
+    speciality: 'Štihi Vinček',
+    image: 'https://res.cloudinary.com/dewf3zos0/image/upload/v1779132092/2994DF28-CBAF-4323-A75E-FED9B3DA7C9A_pubebt.jpg',
+    gallery: [
+      'https://res.cloudinary.com/dewf3zos0/image/upload/v1779132092/IMG_5901_worjra.jpg',
+      'https://res.cloudinary.com/dewf3zos0/image/upload/v1779132092/IMG_8515_yxcqcz.jpg',
+    ],
+    imagePositions: {},
+  },
+  {
+    id: 'pangercen',
+    name: 'Urh Pangercen',
+    role: 'Ravnikarjeva zidanica',
+    location: 'Goljek pri Čatežu',
+    summary: 'Na sončnem pobočju Dolenjske stoji Ravnikarjeva zidanica, obdana z vinogradi in tišino narave – dom Urhovega vinarjenja.',
+    fullDescription: 'Ravnikarjeva zidanica se nahaja v Goljeku pri Čatežu, na sončnem pobočju Dolenjske, obdana z vinogradi in tišino narave. Urh Pangercen s predanostjo in ljubeznijo do zemlje prideluje vina, ki odražajo istovetnost tega kotička Dolenjske. V zidanici se prepletata tradicija, domačnost in ljubezen do vina, ki nastaja le nekaj korakov stran v kleti.',
+    speciality: 'Ravnikarjeva zidanica',
+    image: 'https://res.cloudinary.com/dewf3zos0/image/upload/v1779132092/att.eLU-u1nhxFbm_rdhY3NmWWIu66v1rLkMGlYxF9K6fww_mzyqn7.jpg',
+    gallery: [],
+    imagePositions: {},
+  },
+  {
+    id: 'novak',
+    name: 'Matevž Novak',
+    role: 'Sommelier',
+    location: '3. stopnja · šola Sommelie Master',
+    summary: 'Certificirani sommelier 3. stopnje vas bo popeljal skozi svet vina, sommelierstva in ocenjevanja.',
+    fullDescription: 'Matevž Novak je certificirani sommelier 3. stopnje šole Sommelie Master. Skozi večer bo udeležence popeljal skozi svet vina in sommelierstva. Degustacija bo obsegala 10 vzorcev vin – ob tem boste spoznali osnove ocenjevanja vina, pomembne značilnosti, tehnike degustacije ter zanimivosti iz vinskega sveta. Udeleženci bodo aktivno vključeni v proces degustacije in se za večer preizkusili v vlogi sommelierja.',
+    speciality: 'Sommelier',
+    image: null,
+    gallery: [],
+    imagePositions: {},
+  },
+];
+
+const includes = [
+  {
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 3h9L14.5 9.5c-.4 1.5-1.5 2.5-2.5 2.5s-2.1-1-2.5-2.5L7.5 3zM12 12v7m-3.5.5h7" /></svg>`,
+    title: '10 vzorcev vina',
+    description: '5 vzorcev vsakega vinarja, s sommelierskim vodenjem skozi vsak vzorec.',
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4c0 1.1.9 2 2 2s2-.9 2-2V3M7 3v18" /><path stroke-linecap="round" stroke-linejoin="round" d="M17 3c-2 0-3 3-3 6s1 3 3 3M17 3v18" /></svg>`,
+    title: 'Prigrizki',
+    description: 'Lokalni prigrizki ob degustaciji.',
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 0 0 2.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 0 1 2.916.52 6.003 6.003 0 0 1-5.395 4.972m0 0a6.726 6.726 0 0 1-2.749 1.35m0 0a6.772 6.772 0 0 1-3.044 0" /></svg>`,
+    title: 'Sommelier vodstvo',
+    description: 'Matevž Novak (3. stopnja) vas popelje skozi svet vina in sommelierstva.',
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z" /></svg>`,
+    title: 'Živa glasba',
+    description: 'Glasbena spremljava med sprostitvijo.',
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H4.5a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg>`,
+    title: 'Kozarec ob registraciji',
+    description: 'Ob prihodu dobiš pozdravni kozarček.',
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>`,
+    title: 'Sunset after party',
+    description: 'Vstop prost. Pijača in hrana se plačuje izključno z gotovino.',
+  },
+];
+---
+
+<Layout
+  title="Od kleti do noči | Specijalka – Ravnikar x Štihi · 20. junij 2026"
+  description="Posebna vinska degustacija s sommelierjem Matevžem Novakom in vinarjema Gašperjem Štihom ter Urh Pangercenom. 20. junij 2026, Ravnikarjeva zidanica, Goljek pri Čatežu."
+>
+  <Navbar />
+  <main>
+
+    <!-- HERO -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+      <div class="absolute inset-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-teal-950/60 via-teal-950/40 to-teal-950/70 z-10"></div>
+        <img
+          src="/images/hero.jpg"
+          alt="Pogled iz zraka na dolenjske griče in zidanice"
+          class="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+
+      <div class="relative z-20 text-center px-6 max-w-4xl mx-auto">
+        <div class="w-16 h-px bg-gold-500 mx-auto mb-8 opacity-80"></div>
+
+        <p class="text-gold-400 text-base md:text-lg tracking-[0.3em] uppercase mb-4 font-medium">
+          20. junij 2026 &middot; Goljek pri Čatežu
+        </p>
+
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-4 leading-tight">
+          Od kleti do noči
+        </h1>
+
+        <p class="text-xl md:text-2xl text-white/90 font-heading italic mb-2">
+          <span class="text-gold-400">Specijalka</span> &ndash; Ravnikar x Štihi
+        </p>
+
+        <p class="text-sm md:text-base text-white/60 tracking-[0.2em] uppercase mb-10">
+          s sommelierjem Matevžem Novakom
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="#vstopnice"
+            class="bg-gold-500 hover:bg-gold-400 text-teal-950 px-8 py-4 rounded-full text-base font-semibold tracking-wide transition-all hover:scale-105"
+          >
+            Rezerviraj svoje mesto
+          </a>
+          <a
+            href="#o-dogodku"
+            class="border border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-full text-base font-medium tracking-wide transition-all hover:bg-white/10"
+          >
+            Več o dogodku
+          </a>
+        </div>
+      </div>
+
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
+        <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
+          <div class="w-1 h-3 bg-gold-500 rounded-full animate-bounce"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- O DOGODKU -->
+    <section id="o-dogodku" class="py-24 md:py-32 bg-cream-50">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <div class="fade-in">
+          <div class="flex items-center justify-center gap-4 mb-8">
+            <div class="w-12 h-px bg-gold-500"></div>
+            <svg class="w-6 h-6 text-gold-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C8.5 2 5 5.5 5 10c0 2.5 1.5 5 3 7h8c1.5-2 3-4.5 3-7 0-4.5-3.5-8-7-8zm-1 18h2v2h-2v-2z" opacity="0.7"/>
+            </svg>
+            <div class="w-12 h-px bg-gold-500"></div>
+          </div>
+
+          <p class="text-gold-600 text-sm tracking-[0.3em] uppercase mb-4 font-medium">Specijalka – Ravnikar x Štihi</p>
+
+          <h2 class="text-3xl md:text-5xl font-heading font-bold text-teal-900 mb-8">
+            O dogodku
+          </h2>
+
+          <p class="text-lg md:text-xl text-teal-800/80 leading-relaxed mb-6 max-w-3xl mx-auto text-justify">
+            Posebna vinska degustacija v organizaciji Ravnikarjeve zidanice in Štihi vinska, pripravljena v sklopu zgodbe <em>Od kleti do noči</em>. Dogodek v lokalnem dolenjskem okolju, namenjen vsem ljubiteljem vina, druženja in dobrih glasb.
+          </p>
+
+          <p class="text-lg md:text-xl text-teal-800/80 leading-relaxed mb-6 max-w-3xl mx-auto text-justify">
+            Večer bo vodil <strong class="text-teal-900">sommelier Matevž Novak</strong> (3. stopnja, šola Sommelie Master), ki bo udeležence popeljal skozi svet vina in sommelierstva. Degustacija bo obsegala <strong class="text-teal-900">10 vzorcev vin</strong> – ob tem boste spoznali osnove ocenjevanja vina, tehnike degustacije ter zanimivosti iz vinskega sveta.
+          </p>
+
+          <p class="text-lg md:text-xl text-teal-800/80 leading-relaxed mb-6 max-w-3xl mx-auto text-justify">
+            Udeleženci bodo aktivno vključeni v proces degustacije in se za večer preizkusili v vlogi sommelierja. Vinarji bosta skupaj s sommelierjem predstavila posebnosti pridelave vina v njunih vinogradih ter komentirala posamezne vzorce.
+          </p>
+
+          <p class="text-lg md:text-xl text-teal-800/70 leading-relaxed max-w-3xl mx-auto italic text-justify">
+            Za povrhu bo na voljo prigrizek. Zaključek dela sledi sproščen večerni program: živa glasba ter sunset after party z DJ-jem Urbanom Šilcem (DJ Uxny).
+          </p>
+        </div>
+
+        <div class="fade-in grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-teal-800/10">
+          <div>
+            <p class="text-3xl md:text-4xl font-heading font-bold text-gold-500">2</p>
+            <p class="text-sm text-teal-800/60 mt-1 uppercase tracking-wide">Vinarji</p>
+          </div>
+          <div>
+            <p class="text-3xl md:text-4xl font-heading font-bold text-gold-500">10</p>
+            <p class="text-sm text-teal-800/60 mt-1 uppercase tracking-wide">Vzorcev vina</p>
+          </div>
+          <div>
+            <p class="text-3xl md:text-4xl font-heading font-bold text-gold-500">1</p>
+            <p class="text-sm text-teal-800/60 mt-1 uppercase tracking-wide">Sommelier</p>
+          </div>
+          <div>
+            <p class="text-3xl md:text-4xl font-heading font-bold text-gold-500">&infin;</p>
+            <p class="text-sm text-teal-800/60 mt-1 uppercase tracking-wide">Spominov</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAM -->
+    <section id="program" class="py-24 md:py-32 bg-teal-900">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-16 fade-in">
+          <div class="flex items-center justify-center gap-4 mb-8">
+            <div class="w-12 h-px bg-gold-500/50"></div>
+            <p class="text-gold-400 text-sm tracking-[0.3em] uppercase">Potek večera</p>
+            <div class="w-12 h-px bg-gold-500/50"></div>
+          </div>
+          <h2 class="text-3xl md:text-5xl font-heading font-bold text-white">
+            Program
+          </h2>
+        </div>
+
+        <div class="relative">
+          <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gold-500/20 md:-translate-x-px"></div>
+
+          {program.map((event, i) => (
+            <div class={`fade-in relative flex items-start gap-6 md:gap-0 mb-12 last:mb-0 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+              <div class={`flex-1 md:w-1/2 ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'} ml-16 md:ml-0`}>
+                <p class="text-gold-400 font-heading text-lg font-semibold">{event.time}</p>
+                <h3 class="text-xl font-heading font-bold text-white mt-1">{event.title}</h3>
+                <p class="text-white/60 mt-2 text-sm leading-relaxed">{event.description}</p>
+              </div>
+
+              <div class="absolute left-4 md:left-1/2 md:-translate-x-1/2 w-8 h-8 bg-teal-800 border-2 border-gold-500/40 rounded-full flex items-center justify-center text-sm z-10">
+                {event.icon}
+              </div>
+
+              <div class="hidden md:block flex-1 md:w-1/2"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- KAJ JE VKLJUČENO -->
+    <section class="py-24 md:py-32 bg-cream-100">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16 fade-in">
+          <div class="flex items-center justify-center gap-4 mb-8">
+            <div class="w-12 h-px bg-gold-500"></div>
+            <p class="text-gold-600 text-sm tracking-[0.3em] uppercase">Vse v eni ceni</p>
+            <div class="w-12 h-px bg-gold-500"></div>
+          </div>
+          <h2 class="text-3xl md:text-5xl font-heading font-bold text-teal-900">
+            Kaj je vključeno
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {includes.map((item, i) => (
+            <div class="fade-in">
+              <div
+                class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-teal-800/5 card-float h-full"
+                style={`animation-duration: ${3 + (i % 3) * 0.8}s; animation-delay: ${i * 0.4}s;`}
+              >
+                <div class="text-gold-500 mb-4 group-hover:scale-110 transition-transform" set:html={item.icon} />
+                <h3 class="text-lg font-heading font-bold text-teal-900 mb-2">{item.title}</h3>
+                <p class="text-teal-800/60 text-sm leading-relaxed">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- GOSTITELJI -->
+    <section id="vinarji" class="py-24 md:py-32 bg-cream-50">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16 fade-in">
+          <div class="flex items-center justify-center gap-4 mb-8">
+            <div class="w-12 h-px bg-gold-500"></div>
+            <p class="text-gold-600 text-sm tracking-[0.3em] uppercase">Vaši gostitelji</p>
+            <div class="w-12 h-px bg-gold-500"></div>
+          </div>
+          <h2 class="text-3xl md:text-5xl font-heading font-bold text-teal-900">
+            Spoznajte gostitelje
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+          {hosts.map((host) => (
+            <div class="fade-in group cursor-pointer" data-host={host.id}>
+              <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6 relative bg-teal-800">
+                {host.image ? (
+                  <img
+                    src={host.image}
+                    alt={host.name}
+                    class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-teal-800 to-teal-900">
+                    <span class="font-heading text-5xl font-bold text-gold-400/60">MN</span>
+                  </div>
+                )}
+                <div class="absolute inset-0 bg-gradient-to-t from-teal-950/60 to-transparent"></div>
+                <div class="absolute bottom-4 left-4">
+                  <span class="bg-gold-500/90 text-teal-950 text-xs font-semibold px-3 py-1 rounded-full">
+                    {host.speciality}
+                  </span>
+                </div>
+              </div>
+
+              <h3 class="text-xl font-heading font-bold text-teal-900 mb-1 group-hover:text-gold-600 transition-colors">
+                {host.name}
+              </h3>
+              <p class="text-gold-600 text-xs font-semibold uppercase tracking-wide mb-2">{host.location}</p>
+              <p class="text-teal-800/60 text-sm leading-relaxed mb-3">
+                {host.summary}
+              </p>
+              <span class="text-gold-600 text-sm font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                Več
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- VSTOPNICE -->
+    <section id="vstopnice" class="py-24 md:py-32 bg-teal-900 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-gold-500/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 bg-gold-500/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+
+      <div class="max-w-4xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16 fade-in">
+          <div class="flex items-center justify-center gap-4 mb-8">
+            <div class="w-12 h-px bg-gold-500/50"></div>
+            <p class="text-gold-400 text-sm tracking-[0.3em] uppercase">Omejeno število mest</p>
+            <div class="w-12 h-px bg-gold-500/50"></div>
+          </div>
+          <h2 class="text-3xl md:text-5xl font-heading font-bold text-white">
+            Vstopnice
+          </h2>
+        </div>
+
+        <div class="fade-in max-w-lg mx-auto">
+          <div class="bg-teal-800/50 backdrop-blur-sm border border-gold-500/20 rounded-3xl p-10 md:p-12 text-center">
+            <p class="text-gold-400 text-sm tracking-[0.2em] uppercase mb-2">Vinska degustacija</p>
+            <div class="flex items-end justify-center gap-1 mb-2">
+              <span class="text-6xl md:text-7xl font-heading font-bold text-white">35</span>
+              <span class="text-2xl text-white/80 font-heading mb-2">&euro;</span>
+              <span class="text-white/50 mb-2 ml-1">/ osebo</span>
+            </div>
+
+            <ul class="text-left space-y-3 mb-6">
+              {[
+                '10 vzorcev vina',
+                'Prigrizki',
+                'Sommelier vodstvo (Matevž Novak)',
+                'Živa glasba',
+                'Kozarec ob registraciji',
+              ].map((item) => (
+                <li class="flex items-start gap-3 text-white/80 text-sm">
+                  <svg class="w-5 h-5 text-gold-500 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+                  </svg>
+                  {item}
+                </li>
+              ))}
+              <li class="flex items-start gap-3 text-white/80 text-sm">
+                <svg class="w-5 h-5 text-gold-500 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+                </svg>
+                <span>
+                  <span class="whitespace-nowrap">Sunset after party</span>
+                  <span class="text-white/40"> (vstop prost, pijača in hrana z gotovino)</span>
+                </span>
+              </li>
+            </ul>
+
+            <a
+              href="#"
+              id="checkout-btn-s"
+              class="block w-full bg-gold-500/60 cursor-not-allowed text-teal-950/70 py-4 px-8 rounded-full text-lg font-semibold tracking-wide text-center"
+            >
+              Vstopnice kmalu na voljo
+            </a>
+
+            <p class="text-white/40 text-xs mt-4">
+              Nakup prek spleta. Število vstopnic po izbiri.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOKACIJA -->
+    <section id="lokacija" class="py-24 md:py-32 bg-cream-100">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16 fade-in">
+          <div class="flex items-center justify-center gap-4 mb-8">
+            <div class="w-12 h-px bg-gold-500"></div>
+            <p class="text-gold-600 text-sm tracking-[0.3em] uppercase">Kje se vidimo</p>
+            <div class="w-12 h-px bg-gold-500"></div>
+          </div>
+          <h2 class="text-3xl md:text-5xl font-heading font-bold text-teal-900">
+            Lokacija
+          </h2>
+        </div>
+
+        <div class="fade-in grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div class="rounded-2xl overflow-hidden shadow-lg aspect-[4/3]">
+            <iframe
+              src="https://maps.google.com/maps?q=Goljek+pri+%C4%8Cate%C5%BEu%2C+Slovenija&z=15&output=embed"
+              class="w-full h-full border-0"
+              loading="lazy"
+              title="Zemljevid - Goljek pri Čatežu"
+            ></iframe>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-heading font-bold text-teal-900 mb-4">
+              Ravnikarjeva zidanica
+            </h3>
+            <p class="text-teal-800/70 leading-relaxed mb-6">
+              Dogodek se odvija na <strong class="text-teal-900">Ravnikarjevi zidanici v Goljeku pri Čatežu</strong>, na sončnem pobočju Dolenjske z razgledi na gričevito okolico.
+            </p>
+
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-gold-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                </svg>
+                <div>
+                  <p class="text-sm font-semibold text-teal-900">Naslov</p>
+                  <p class="text-sm text-teal-800/60">Goljek pri Čatežu, Dolenjska</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-gold-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <div>
+                  <p class="text-sm font-semibold text-teal-900">Datum in ura</p>
+                  <p class="text-sm text-teal-800/60">Petek, 20. junij 2026 ob 16:30</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-gold-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                </svg>
+                <div>
+                  <p class="text-sm font-semibold text-teal-900">Informacije</p>
+                  <p class="text-sm text-teal-800/60"><a href="tel:051255890" class="hover:text-gold-600 transition-colors">051 255 890</a> (Aljaž)</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-gold-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                </svg>
+                <div>
+                  <p class="text-sm font-semibold text-teal-900">E-pošta</p>
+                  <p class="text-sm text-teal-800/60">
+                    <a href="mailto:odkletidonoci@gmail.com" class="hover:text-gold-600 transition-colors">odkletidonoci@gmail.com</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Sponsors />
+  <Footer />
+</Layout>
+
+<!-- Host modal -->
+<div id="host-modal" class="fixed inset-0 z-[100] hidden">
+  <div class="absolute inset-0 bg-teal-950/80 backdrop-blur-sm" id="host-modal-backdrop"></div>
+  <div class="relative z-10 overflow-y-auto max-h-screen p-4 md:p-8" id="host-modal-overlay">
+    <div class="bg-cream-50 rounded-3xl max-w-3xl w-full mx-auto shadow-2xl" id="host-modal-box">
+      <button id="host-modal-close" class="absolute top-6 right-6 w-10 h-10 bg-teal-950/60 hover:bg-teal-950/80 text-white rounded-full flex items-center justify-center transition-colors z-20 cursor-pointer">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <div id="host-modal-content"></div>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ hosts }}>
+  const hostData = hosts;
+
+  function openHostModal(id) {
+    const host = hostData.find(h => h.id === id);
+    if (!host) return;
+
+    const modal = document.getElementById('host-modal');
+    const content = document.getElementById('host-modal-content');
+
+    const allImages = host.image ? [host.image, ...host.gallery] : host.gallery;
+    const positions = host.imagePositions || {};
+
+    const heroHtml = host.image
+      ? `<div class="relative mx-4 md:mx-6 rounded-2xl overflow-hidden" id="host-modal-hero">
+           <img src="${host.image}" alt="${host.name}" class="w-full block object-cover transition-opacity duration-300" style="height: 50vh; object-position: center;" id="host-modal-hero-img" />
+         </div>`
+      : `<div class="relative mx-4 md:mx-6 rounded-2xl overflow-hidden bg-gradient-to-br from-teal-800 to-teal-900 flex items-center justify-center" style="height: 30vh;">
+           <span class="font-heading text-7xl font-bold text-gold-400/40">${host.name.split(' ').map(n => n[0]).join('')}</span>
+         </div>`;
+
+    const galleryHtml = allImages.length > 1
+      ? `<div class="grid grid-cols-4 gap-2 md:gap-3 mt-6">
+          ${allImages.map((img, i) => `
+            <img src="${img}" alt="${host.name} - slika ${i + 1}"
+              class="rounded-xl w-full aspect-square object-cover hover:scale-[1.02] transition-transform cursor-pointer gallery-thumb ${i === 0 ? 'ring-2 ring-gold-500' : 'opacity-70 hover:opacity-100'}"
+              data-full="${img}" data-position="${positions[img] || 'center'}" loading="lazy" />
+          `).join('')}
+        </div>`
+      : '';
+
+    content.innerHTML = `
+      <div class="p-8 md:p-10 pb-4">
+        <span class="bg-gold-500/90 text-teal-950 text-xs font-semibold px-3 py-1 rounded-full">${host.speciality}</span>
+        <h3 class="text-2xl md:text-3xl font-heading font-bold text-teal-900 mt-4 mb-1">${host.name}</h3>
+        <p class="text-gold-600 text-sm font-semibold uppercase tracking-wide mb-4">${host.location}</p>
+        <p class="text-teal-800/70 leading-relaxed">${host.fullDescription}</p>
+      </div>
+      ${heroHtml}
+      <div class="p-8 md:p-10 pt-4">${galleryHtml}</div>
+    `;
+
+    if (host.image && allImages.length > 1) {
+      content.querySelectorAll('.gallery-thumb').forEach(thumb => {
+        thumb.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const heroImg = document.getElementById('host-modal-hero-img');
+          heroImg.style.opacity = '0';
+          setTimeout(() => {
+            heroImg.src = thumb.dataset.full;
+            heroImg.style.objectPosition = 'center ' + thumb.dataset.position;
+            heroImg.style.opacity = '1';
+          }, 150);
+          content.querySelectorAll('.gallery-thumb').forEach(t => {
+            t.classList.remove('ring-2', 'ring-gold-500');
+            t.classList.add('opacity-70');
+          });
+          thumb.classList.add('ring-2', 'ring-gold-500');
+          thumb.classList.remove('opacity-70');
+        });
+      });
+    }
+
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeHostModal() {
+    document.getElementById('host-modal').classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-host]').forEach(card => {
+    card.addEventListener('click', () => openHostModal(card.dataset.host));
+  });
+
+  document.getElementById('host-modal-overlay')?.addEventListener('click', (e) => {
+    if (!document.getElementById('host-modal-box')?.contains(e.target)) closeHostModal();
+  });
+  document.getElementById('host-modal-backdrop')?.addEventListener('click', closeHostModal);
+  document.getElementById('host-modal-close')?.addEventListener('click', closeHostModal);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeHostModal(); });
+</script>
+
+<style>
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .card-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  .card-float:hover {
+    animation-play-state: paused;
+  }
+</style>
