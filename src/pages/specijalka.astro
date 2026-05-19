@@ -34,8 +34,8 @@ const program = [
 const hosts = [
   {
     id: 'stih',
-    name: 'Gašper Štih',
-    role: 'Štihi Vinček',
+    name: 'Štihi Vinček',
+    role: 'Gašper Štih',
     location: 'Smolenja vas pri Novem mestu',
     summary: 'Butična klet z iskrenim pristopom k vinarjenju. Gašper v svojih vinogradih išče ravnovesje med naravo in tradicijo dolenjskega terroir.',
     fullDescription: 'Štihi Vinček je butična klet Gašperja Štiha v Smolenjski vasi pri Novem mestu. Gašper pristopa k vinarjenju z globokim spoštovanjem do narave in terroir dolenjskega območja. Njegova vina odražajo pristnost in karakter rodovitnih dolenjskih leg, pri čemer daje prednost minimalnim posegom v kleti in čim bolj naravnemu procesu zorenja.',
@@ -49,8 +49,8 @@ const hosts = [
   },
   {
     id: 'pangercen',
-    name: 'Urh Pangercen',
-    role: 'Ravnikarjeva zidanica',
+    name: 'Vinska klet Ravnikar',
+    role: 'Urh Pangercen',
     location: 'Goljek pri Čatežu',
     summary: 'Na sončnem pobočju Dolenjske stoji Ravnikarjeva zidanica, obdana z vinogradi in tišino narave – dom Urhovega vinarjenja.',
     fullDescription: 'Ravnikarjeva zidanica se nahaja v Goljeku pri Čatežu, na sončnem pobočju Dolenjske, obdana z vinogradi in tišino narave. Urh Pangercen s predanostjo in ljubeznijo do zemlje prideluje vina, ki odražajo istovetnost tega kotička Dolenjske. V zidanici se prepletata tradicija, domačnost in ljubezen do vina, ki nastaja le nekaj korakov stran v kleti.',
@@ -120,13 +120,17 @@ const includes = [
   title="Od kleti do noči | Specijalka – Ravnikar x Štihi · 20. junij 2026"
   description="Posebna vinska degustacija s sommelierjem Matevžem Novakom in vinarjema Gašperjem Štihom ter Urh Pangercenom. 20. junij 2026, Ravnikarjeva zidanica, Goljek pri Čatežu."
 >
+  <div class="specijalka-theme">
+  <!-- Grain overlay -->
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-[998] opacity-[0.045]" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22250%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix type=%22saturate%22 values=%220%22/%3E%3C/filter%3E%3Crect width=%22250%22 height=%22250%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); background-size: 250px 250px;"></div>
   <Navbar />
   <main>
 
     <!-- HERO -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
       <div class="absolute inset-0">
-        <div class="absolute inset-0 bg-gradient-to-b from-teal-950/60 via-teal-950/40 to-teal-950/70 z-10"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-teal-950/75 via-teal-950/30 to-teal-950/85 z-10"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#C4622D]/30 via-transparent to-transparent z-10"></div>
         <img
           src="/images/hero.jpg"
           alt="Pogled iz zraka na dolenjske griče in zidanice"
@@ -137,22 +141,20 @@ const includes = [
       </div>
 
       <div class="relative z-20 text-center px-6 max-w-4xl mx-auto">
-        <div class="w-16 h-px bg-gold-500 mx-auto mb-8 opacity-80"></div>
-
-        <p class="text-gold-400 text-base md:text-lg tracking-[0.3em] uppercase mb-4 font-medium">
-          20. junij 2026 &middot; Goljek pri Čatežu
+        <p class="text-gold-400 text-xs md:text-sm tracking-[0.35em] uppercase mb-6 font-medium">
+          Od kleti do noči &middot; 20. junij 2026 &middot; Goljek pri Čatežu
         </p>
 
-        <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-4 leading-tight">
-          Od kleti do noči
+        <h1 class="text-7xl md:text-9xl lg:text-[11rem] font-heading font-bold text-white mb-5 leading-none tracking-tight">
+          Specijalka
         </h1>
 
-        <p class="text-xl md:text-2xl text-white/90 font-heading italic mb-2">
-          <span class="text-gold-400">Specijalka</span> &ndash; Ravnikar x Štihi
+        <p class="text-2xl md:text-3xl text-white/85 font-heading italic mb-4">
+          Vino in prijatelji
         </p>
 
-        <p class="text-sm md:text-base text-white/60 tracking-[0.2em] uppercase mb-10">
-          s sommelierjem Matevžem Novakom
+        <p class="text-xs md:text-sm text-white/45 tracking-[0.3em] uppercase mb-10">
+          Ravnikar x Štihi · sommelier Matevž Novak
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -522,6 +524,7 @@ const includes = [
   </main>
   <Sponsors />
   <Footer />
+  </div>
 </Layout>
 
 <!-- Host modal -->
@@ -623,7 +626,21 @@ const includes = [
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeHostModal(); });
 </script>
 
-<style>
+<style is:global>
+  /* Lo-fi Summer palette — scoped to specijalka page only */
+  .specijalka-theme {
+    --color-teal-950: #1C2918;
+    --color-teal-900: #243520;
+    --color-teal-800: #344F30;
+    --color-teal-700: #455F41;
+    --color-gold-500: #C4622D;
+    --color-gold-400: #D4773F;
+    --color-gold-600: #A85228;
+    --color-cream-50:  #F7EDD8;
+    --color-cream-100: #EFE2C4;
+    --color-cream-200: #E4D4B0;
+  }
+
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
