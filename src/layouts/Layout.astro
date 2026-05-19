@@ -30,6 +30,7 @@ const { title, description = "Degustacijsko doživetje v srcu Dolenjske. Obišč
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <slot name="head" />
   </head>
   <body class="bg-cream-50">
     <slot />

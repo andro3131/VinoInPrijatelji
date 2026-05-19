@@ -120,6 +120,11 @@ const includes = [
   title="Od kleti do noči | Specijalka – Ravnikar x Štihi · 20. junij 2026"
   description="Posebna vinska degustacija s sommelierjem Matevžem Novakom in vinarjema Gašperjem Štihom ter Urh Pangercenom. 20. junij 2026, Ravnikarjeva zidanica, Goljek pri Čatežu."
 >
+  <Fragment slot="head">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  </Fragment>
   <div class="specijalka-theme">
   <!-- Grain overlay -->
   <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-[998] opacity-[0.045]" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22250%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix type=%22saturate%22 values=%220%22/%3E%3C/filter%3E%3Crect width=%22250%22 height=%22250%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); background-size: 250px 250px;"></div>
@@ -249,7 +254,7 @@ const includes = [
     </section>
 
     <!-- PROGRAM -->
-    <section id="program" class="py-24 md:py-32 bg-teal-900">
+    <section id="program" class="py-24 md:py-32 bg-teal-900 s-diag">
       <div class="max-w-4xl mx-auto px-6">
         <div class="text-center mb-16 fade-in">
           <div class="flex items-center justify-center gap-4 mb-8">
@@ -373,7 +378,7 @@ const includes = [
     </section>
 
     <!-- VSTOPNICE -->
-    <section id="vstopnice" class="py-24 md:py-32 bg-teal-900 relative overflow-hidden">
+    <section id="vstopnice" class="py-24 md:py-32 bg-teal-900 relative overflow-hidden s-diag-r">
       <div class="absolute top-0 right-0 w-96 h-96 bg-gold-500/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
       <div class="absolute bottom-0 left-0 w-64 h-64 bg-gold-500/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
 
@@ -627,7 +632,7 @@ const includes = [
 </script>
 
 <style is:global>
-  /* Wine & Ocher palette — scoped to specijalka page only */
+  /* Wine & Ocher palette + Natural Wine Bar style — scoped to specijalka */
   .specijalka-theme {
     --color-teal-950: #1A0B0E;
     --color-teal-900: #2E1218;
@@ -639,6 +644,32 @@ const includes = [
     --color-cream-50:  #FAF0E8;
     --color-cream-100: #F2E4D4;
     --color-cream-200: #E8D4BC;
+    --font-heading: "Fraunces", serif;
+  }
+
+  /* DM Mono za labele in uppercase metadata */
+  .specijalka-theme p.uppercase,
+  .specijalka-theme span.uppercase {
+    font-family: "DM Mono", monospace;
+  }
+
+  /* Navbar override — prepiše hardkodirano barvo iz global.css */
+  .specijalka-theme #navbar.navbar-scrolled {
+    background-color: rgba(26, 11, 14, 0.96) !important;
+  }
+
+  /* Diagonalni rez — top-left nižji */
+  .specijalka-theme .s-diag {
+    clip-path: polygon(0 3.5vw, 100% 0, 100% 100%, 0 100%);
+    margin-top: -2vw;
+    padding-top: calc(6rem + 3.5vw) !important;
+  }
+
+  /* Diagonalni rez — top-right nižji */
+  .specijalka-theme .s-diag-r {
+    clip-path: polygon(0 0, 100% 3.5vw, 100% 100%, 0 100%);
+    margin-top: -2vw;
+    padding-top: calc(6rem + 3.5vw) !important;
   }
 
   @keyframes float {
