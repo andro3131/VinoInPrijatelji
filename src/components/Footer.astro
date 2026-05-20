@@ -1,4 +1,16 @@
 ---
+interface Props {
+  email?: string;
+  phone?: string;
+  phoneHref?: string;
+  phoneName?: string;
+}
+const {
+  email = 'odkletidonoci@gmail.com',
+  phone = '051 255 890',
+  phoneHref = '+38651255890',
+  phoneName = 'Aljaž',
+} = Astro.props;
 ---
 
 <footer class="bg-teal-950 py-16">
@@ -45,19 +57,19 @@
         <h4 class="text-gold-400 text-sm font-semibold tracking-wide uppercase mb-4">Kontakt</h4>
         <ul class="space-y-2">
           <li>
-            <a href="mailto:odkletidonoci@gmail.com" class="text-white/50 hover:text-gold-400 text-sm transition-colors flex items-center gap-2">
+            <a href={`mailto:${email}`} class="text-white/50 hover:text-gold-400 text-sm transition-colors flex items-center gap-2">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
               </svg>
-              odkletidonoci@gmail.com
+              {email}
             </a>
           </li>
           <li>
-            <a href="tel:+38651255890" class="text-white/50 hover:text-gold-400 text-sm transition-colors flex items-center gap-2">
+            <a href={`tel:${phoneHref}`} class="text-white/50 hover:text-gold-400 text-sm transition-colors flex items-center gap-2">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
               </svg>
-              051 255 890 (Aljaž)
+              {phone} ({phoneName})
             </a>
           </li>
           <li>
